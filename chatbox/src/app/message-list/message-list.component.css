@@ -1,0 +1,67 @@
+
+.message-box {
+  padding: 6px 12px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+
+.message-box.mine {
+  background-color: rgba(51, 106, 189, 0.651);
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.message-box.theirs {
+  background-color: rgba(236, 226, 226, 0.2);
+  text-align: left;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+
+.align-right {
+  text-align: right;
+}
+
+
+.align-left {
+  text-align: left;
+}
+
+
+.message-box > p.message {
+  color: black;
+  font-size: 0.8em;
+  margin: 0 2.8em;
+}
+
+/* Estilos para o nome do usuário */
+.message-box > p.name {
+  color: #000000;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 0 2.8em;
+}
+
+/* Ícone da mensagem */
+.message-box i.fa {
+  font-size: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+/* Link de download */
+.message-box a {
+  display: inline-block;
+  margin-top: 0.5em;
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Efeito de hover para o link de download */
+.message-box a:hover {
+  text-decoration: underline;
+}

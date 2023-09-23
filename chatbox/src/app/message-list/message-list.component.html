@@ -1,0 +1,21 @@
+<div class="chatbox__messages">
+  <div class="user-message" *ngFor="let msg of getMessagesToShow()">
+    <div [ngClass]="{ 'align-right': msg.sender === currentUserName, 'align-left': msg.sender !== currentUserName }">
+      <div class="message-box" [ngClass]="{ mine: msg.sender === currentUserName, theirs: msg.sender !== currentUserName }">
+        <p class="name" *ngIf="msg.sender !== currentUserName">{{ msg.sender }} disse:</p>
+        <p *ngIf="msg.file" class="message">
+          <i class="fa fa-file"></i> {{ msg.file}}
+          <a [href]="msg.file" target="_blank">
+            <i class="fa fa-download"></i>
+          </a>
+        </p>
+        <p class="message">{{ msg.text }}</p>
+      </div>
+    </div>
+    <div *ngIf="msg.file && msg.sender !== currentUserName" class="download-link">
+      <a [href]="msg.file" download>
+        <i class="fa fa-download"></i>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<aside>
+  <ul>
+    <li *ngFor="let group of groupList">
+      <button (click)="onGroupClick(group)">{{ group }}</button>
+    </li>
+  </ul>
+  </aside>
+
+  <div *ngIf="selectedGroup" class="chat-group">
+    <app-message-list [selectedGroup]="selectedGroup"></app-message-list>
+  </div>

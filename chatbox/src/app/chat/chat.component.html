@@ -1,0 +1,128 @@
+<div class="card-container" *ngIf="show">
+  <div class="list-container" [ngClass]="{ hidden: !showList }">
+    <app-user-list></app-user-list>
+  </div>
+
+  <div class="chat-group" [ngClass]="{ hidden: !showGroupList }">
+    <app-chat-group (groupSelected)="onGroupSelected($event)"></app-chat-group>
+  </div>
+
+  <div class="card chat">
+    <div class="card-header">
+      <div
+        class="header-content d-flex justify-content-between align-items-center"
+      >
+        <div>
+          <button
+            class="btn btn-outline-primary btn-user-list margin-left"
+            (click)="toggleList()"
+          >
+            <i class="fa fa-address-book" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-primary btn-group-list margin-left"
+            (click)="toggleGroup()"
+          >
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-danger btn-close format_align_right"
+            (click)="onButtonClick()"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="message-list-container">
+        <div *ngIf="selectedGroup" class="chat-group">
+          <app-message-list [messages]= "messageList" [selectedGroup]="selectedGroup"></app-message-list>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="input-message">
+      <div class="card-footer text-body-secondary">
+        <div class="input-group">
+          <input
+            type="file"
+            #fileInput
+            style="display: none"
+            (change)="handleFileSelected($event)"
+          />
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="message"
+            placeholder="Sua mensagem"
+          />
+          <div class="input-group-prepend">
+            <button class="btn btn-secondary" (click)="fileInput.click()">
+              <i class="fa fa-paperclip" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-primary" (click)="messageToUser()">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div
+  class="registroIcon"
+  *ngIf="showRegistrationIcon && !showForm && !userName"
+  (click)="showRegistrationForm()">
+  <span><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></span>
+</div>
+
+<div
+  class="chatIcon"
+  *ngIf="!showForm && userName && !show"
+  (click)="userName ? onButtonClick() : showRegistrationForm()"
+  [class.disabled]="!userName">
+  <span><i class="fa fa-comments fa-2x" aria-hidden="true"></i></span>
+</div>
+
+<div *ngIf="!userName" class="registration-message">
+  Por favor, registre-se!
+</div>
+
+
+
+
+<div class="overlay" *ngIf="showForm">
+  <div class="formulario-registro">
+    <h3>Registrar usuário</h3>
+    <input
+      type="text"
+      [(ngModel)]="newUserName"
+      placeholder="Insira seu nome"
+    />
+    <label for="cityList">Selecione sua cidade:</label>
+    <app-registro (citySelected)="onCitySelected($event)" (cityListUpdated)="onCityListUpdated($event)"></app-registro>
+
+    <label for="groupList">Selecione seu setor:</label>
+    <select id="groupList" [(ngModel)]="selectedGroup" class="form-control">
+      <option *ngFor="let group of groupList" [value]="group">
+        {{group}}
+      </option>
+    </select>
+    <button class="btn btn-primary" (click)="userNameUpdate">Registrar</button>
+    <button class="btn btn-secondary" (click)="closeRegistrationForm()">
+      Cancelar
+    </button>
+  </div>
+</div>
+
+
